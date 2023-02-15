@@ -1,8 +1,17 @@
+@import url('https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@200;300;400;600;700&display=swap');
+
 *, ::before, ::after {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
 }
+
+body {
+  background: $white;
+  font-family: 'Nunito Sans', sans-serif;
+}
+
+// Nav bar
 
 nav {
   width: 100%;
@@ -20,6 +29,36 @@ nav {
 
     &::selection {
       background: none;
+    }
+  }
+}
+
+// Indice
+
+.hint {
+  position: absolute;
+  bottom: 30px;
+  right: 30px;
+
+  button {
+    padding: 5px 15px;
+    background: $cPrin;
+    outline: none;
+    border: none;
+    font-size: 18px;
+    color: $white;
+    border-radius: 9999px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $cAcc;
+    }
+
+    &.active {
+      width: 300px;
+      height: auto;
+      border-radius: 20px;
     }
   }
 }

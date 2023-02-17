@@ -23,6 +23,7 @@ nav {
   height: 70px;
   text-align: center;
   background: #2541BE;
+  border-bottom: 2px solid #16266D;
 }
 nav h1 {
   text-transform: uppercase;
@@ -79,6 +80,32 @@ nav h1::selection {
 }
 .game1 label {
   margin: 0px 10px;
+}
+
+.game2 {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  margin-top: -75px;
+  gap: 15px;
+}
+.game2 .color-area {
+  width: 500px;
+  height: 350px;
+  background: red;
+}
+.game2 button {
+  outline: none;
+  border: none;
+  background: #2541BE;
+  color: #F1F1F1;
+  padding: 7px 16px;
+  border-radius: 9999px;
+  font-size: 18px;
+  cursor: pointer;
+}
+.game2 button:hover {
+  background: #16266D;
 }
 
 /*# sourceMappingURL=style.css.map */

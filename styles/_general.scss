@@ -9,6 +9,14 @@
 body {
   background: $white;
   font-family: 'Nunito Sans', sans-serif;
+  height: 100vh;
+}
+
+.center {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 
 // Nav bar
@@ -60,5 +68,28 @@ nav {
       height: auto;
       border-radius: 20px;
     }
+  }
+}
+
+// Game 1
+
+.game1 {
+  .play-button {
+    height: 300px;
+    width: 300px;
+    clip-path: polygon(100% 50%, 0 0, 0 100%);
+    background: $cPrin;
+    margin: 0 50px;
+    cursor: pointer;
+    transition: all 0.2s;
+
+    &:hover {
+      background: $cAcc;
+    }
+  }
+
+  .checkbox {
+    margin: 10px 0;
+    display: none;
   }
 }

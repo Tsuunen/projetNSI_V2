@@ -92,7 +92,7 @@ nav h1::selection {
 .game2 .color-area {
   width: 500px;
   height: 350px;
-  background: red;
+  background: #333;
 }
 .game2 button {
   outline: none;

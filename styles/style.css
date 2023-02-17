@@ -77,5 +77,8 @@ nav h1::selection {
   margin: 10px 0;
   display: none;
 }
+.game1 label {
+  margin: 0px 10px;
+}
 
 /*# sourceMappingURL=style.css.map */

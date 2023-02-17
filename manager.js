@@ -28,10 +28,10 @@ function game1(gameArea) {
 
   const check2 = document.createElement("input");
   check2.type = "checkbox";
-  check2.id = "check1";
+  check2.id = "check2";
 
   const check2Label = document.createElement("label");
-  check2Label.setAttribute("for", "check1");
+  check2Label.setAttribute("for", "check2");
   check2Label.textContent = "Veuillez cocher toutes les cases !";
 
   check1Container.appendChild(check1);
@@ -45,6 +45,18 @@ function game1(gameArea) {
   container.appendChild(check2Container);
 
   gameArea.appendChild(container);
+
+  playButton.addEventListener("click", () => {
+    if (!check1.checked) {
+      check1Container.style.display = "block";
+    }
+    else if (!check2.checked && check1.checked) {
+      check2Container.style.display = "block";
+    }
+    else if (check1.checked && check2.checked) {
+      console.log("finished");
+    }
+  });
 }
 
 game1(gameArea);

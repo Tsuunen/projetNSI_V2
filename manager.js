@@ -1,13 +1,15 @@
-// const en = document.querySelector("#enigme");
-// en.appendChild(game);
-// en.insert(game)
-
 let gameArea = document.querySelector("#game");
+
+function clean() {
+  const container = document.querySelector("#container");
+  container.remove();
+}
 
 function game1(gameArea) {
   const container = document.createElement("div");
   container.classList.add("center");
   container.classList.add("game1");
+  container.id = "container";
 
   const playButton = document.createElement("div");
   playButton.classList.add("play-button");
@@ -54,9 +56,30 @@ function game1(gameArea) {
       check2Container.style.display = "block";
     }
     else if (check1.checked && check2.checked) {
-      console.log("finished");
+      game2();
     }
   });
 }
 
-game1(gameArea);
+function game2(gameArea) {
+  // clean();
+
+  const container = document.createElement("div");
+  container.id = "container";
+  container.classList.add("game2");
+  container.classList.add("center");
+
+  const colorArea = document.createElement("div");
+  colorArea.classList.add("color-area");
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.innerHTML = "Commencer";
+
+  container.appendChild(colorArea);
+  container.appendChild(btn);
+
+  gameArea.appendChild(container);
+}
+
+game2(gameArea);

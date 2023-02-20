@@ -1,13 +1,11 @@
-let gameArea = document.querySelector("#game");
+const gameArea = document.querySelector("#game");
 
 function clean() {
   const container = document.querySelector("#container");
   container.remove();
 }
 
-function sleep(ms) {
-  return new Promise(resolve => setTimeout(resolve, ms));
-}
+// Jeu 1
 
 function game1(gameArea) {
   const container = document.createElement("div");
@@ -65,8 +63,10 @@ function game1(gameArea) {
   });
 }
 
+// Jeu 2
+
 function game2(gameArea) {
-  // clean();
+  clean();
 
   const container = document.createElement("div");
   container.id = "container";
@@ -174,8 +174,63 @@ function initGame2() {
   btnStop.innerHTML = "Attendez ...";
 }
 
-function game3() {
+// Jeu 3
+
+function game3(gameArea) {
+  // clean();
+
+  document.body.style.background = "#333";
+  const title = document.querySelector("h1");
+
+  const container = document.createElement("div");
+  container.classList.add("game3");
+  container.id = "container";
+
+  const torch = document.createElement("div");
+  torch.classList.add("torch");
+
+  const torchIcon = document.createElement("div");
+  torchIcon.classList.add("torch-icon");
+
+  const btn = document.createElement("button");
+  btn.type = "button";
+  btn.innerHTML = "Niveau suivant";
+
+  container.appendChild(torch);
+  container.appendChild(torchIcon);
+  container.appendChild(btn);
+
+  gameArea.appendChild(container);
+
+  let torchEnable = false;
+
+  document.addEventListener("mousemove", e => {
+    if (torchEnable) {
+      torch.style.left = `${e.x}px`;
+      torch.style.top = `${e.y}px`;
+    }
+  });
+
+  torchIcon.addEventListener("click", () => {
+    title.innerHTML = "Torche allumé";
+    torchEnable = true;
+    torch.style.display = "block";
+    btn.style.cursor = "pointer";
+  });
+
+  btn.addEventListener("click", () => {
+    if (torchEnable) {
+      title.innerHTML = "games for pro gamer";
+      document.body.style.background = "#F1F1F1";
+      game4(gameArea);
+    }
+  });
+}
+
+// Jeu 4
+
+function game4(gameAreaA) {
   clean();
 }
 
-game2(gameArea);
+game3(gameArea);

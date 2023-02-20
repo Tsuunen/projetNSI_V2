@@ -105,13 +105,23 @@ nav {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -75px;
+  // margin-top: -75px;
   gap: 15px;
+
+  @include center();
 
   .color-area {
     width: 500px;
     height: 350px;
     background: #333;
+
+    &.red {
+      background: red;
+    }
+
+    &.green {
+      background: green;
+    }
   }
 
   button {
@@ -123,9 +133,19 @@ nav {
     border-radius: 9999px;
     font-size: 18px;
     cursor: pointer;
+    display: none;
 
     &:hover {
       background: $cAcc;
     }
+
+    &.active {
+      display: block;
+    }
+  }
+
+  p {
+    text-align: center;
+    font-weight: bold;
   }
 }

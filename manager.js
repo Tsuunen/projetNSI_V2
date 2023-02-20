@@ -66,90 +66,116 @@ function game1(gameArea) {
 }
 
 function game2(gameArea) {
-  clean();
+  // clean();
 
   const container = document.createElement("div");
   container.id = "container";
   container.classList.add("game2");
-  container.classList.add("center");
+  
+  const consigne = document.createElement("p");
+  consigne.innerHTML = "Cliquez sur le bouton 'commencer' et testez votre rapidité !";
 
   const colorArea = document.createElement("div");
   colorArea.classList.add("color-area");
 
   const btnStart = document.createElement("button");
   btnStart.type = "button";
+  btnStart.classList.add("active");
+  btnStart.id = "btnStart";
   btnStart.innerHTML = "Commencer";
 
   const btnStop = document.createElement("button");
   btnStop.type = "button";
-  btnStop.style.display = "none";
+  btnStop.id = "btnStop";
   btnStop.innerHTML = "Attendez ...";
 
+  container.appendChild(consigne);
   container.appendChild(colorArea);
   container.appendChild(btnStart);
   container.appendChild(btnStop);
 
   gameArea.appendChild(container);
 
-  let ableToClick = false;
-  let isCheater = false;
-  let startTime;
+  // initGame2();
 
-  btnStart.addEventListener("click", async function() {
-    colorArea.style.background = "red";
-    btnStart.style.display = "none";
-    btnStop.style.display = "block";
-    ableToClick = false;
+  let timeStart;
+  let latence;
+  let timerTop;
+  let timeoutHandle;
+  let resetTimeoutHandle = null;
+  
+  btnStart.addEventListener("click", () => {
+    latence = 1000 + Math.random() * 2000;
+    colorArea.classList.add("red");
+    btnStart.classList.toggle("active");
+    btnStop.classList.toggle("active");
+    timeStart = timerTop = new Date().getTime();
 
-    for (let i = 0; i < Math.random() * 10000; i++) {
-      await sleep(10);
-    }
-    
-    if (!isCheater) {
-      ableToClick = true;
-      colorArea.style.background = "green";
+    timeoutHandle = window.setTimeout( function() {
+      colorArea.classList.remove("red");
+      colorArea.classList.add("green");
       btnStop.innerHTML = "Cliquez !!!";
-      startTime = new Date().getTime();
-      console.log(startTime);
-    }
+      timerTop = new Date().getTime();
+
+      resetTimeoutHandle = window.setTimeout(function() {
+        initGame2();
+      }, 1500);
+    }, latence);
   });
 
-  btnStop.addEventListener("click", async function() {
-    if (!ableToClick) {
-      isCheater = true;
-      btnStop.innerHTML = "TRICHEUR";
+  btnStop.addEventListener("click", () => {
+    window.clearTimeout(timeoutHandle);
+    if (resetTimeoutHandle !== null) {
+      window.clearTimeout(resetTimeoutHandle);
+    } 
 
-      await sleep(1500);
-      
-      isCheater = false;
-      colorArea.style.background = "#333";
-      btnStop.style.display = "none";
-      btnStart.style.display = "block";
-      btnStop.innerHTML = "Attendez ..."
-    }
+    let timer = new Date().getTime();
+
+    if (timer - timeStart < latence) {
+      perdu(timer - timeStart, "TRICHEUR !!!");
+    } 
     else {
-      let time = new Date().getTime() - startTime;
+      let perf = timer - timerTop;
 
-      if (time > 300) {
-        btnStop.innerHTML = "Trop lent";
-        await sleep(1500);
-
-      colorArea.style.background = "#333";
-      btnStop.style.display = "none";
-      btnStart.style.display = "block";
-      btnStop.innerHTML = "Attendez ..."
+      if (perf > 300) {
+        perdu(perf, "Trop lent !");
       }
       else {
-        btnStop.innerHTML = `${time}ms`;
-        await sleep(1500);
-        game3();
+        affichePerf(perf);
       }
     }
   });
+}
+
+function perdu(timeDiff, m) {
+  btnStop.innerHTML = m;
+  setTimeout(initGame2, 1500);
+}
+
+function affichePerf(timeDiff) {
+  console.log("gagné", timeDiff);
+  btnStop.innerHTML = `${timeDiff}ms`;
+  setTimeout(game3, 1500);
+}
+
+function initGame2() {
+  const colorArea = document.querySelector(".color-area");
+  const btnStop = document.querySelector("#btnStop");
+  const btnStart = document.querySelector("#btnStart");
+
+  colorArea.classList.remove("red");
+  colorArea.classList.remove("green");
+
+  btnStop.classList.remove("active");
+  btnStart.classList.add("active");
+
+  resetTimeoutHandle = null;
+
+  btnStop.innerHTML = "Attendez ...";
 }
 
 function game3() {
   clean();
 }
 
-game1(gameArea);
+game2(gameArea);

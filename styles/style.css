@@ -86,13 +86,22 @@ nav h1::selection {
   display: flex;
   flex-direction: column;
   align-items: center;
-  margin-top: -75px;
   gap: 15px;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
 }
 .game2 .color-area {
   width: 500px;
   height: 350px;
   background: #333;
+}
+.game2 .color-area.red {
+  background: red;
+}
+.game2 .color-area.green {
+  background: green;
 }
 .game2 button {
   outline: none;
@@ -103,9 +112,17 @@ nav h1::selection {
   border-radius: 9999px;
   font-size: 18px;
   cursor: pointer;
+  display: none;
 }
 .game2 button:hover {
   background: #16266D;
+}
+.game2 button.active {
+  display: block;
+}
+.game2 p {
+  text-align: center;
+  font-weight: bold;
 }
 
 /*# sourceMappingURL=style.css.map */

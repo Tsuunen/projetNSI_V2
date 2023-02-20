@@ -155,7 +155,7 @@ function perdu(timeDiff, m) {
 function affichePerf(timeDiff) {
   console.log("gagné", timeDiff);
   btnStop.innerHTML = `${timeDiff}ms`;
-  setTimeout(game3, 1500);
+  setTimeout(game3(gameArea), 1500);
 }
 
 function initGame2() {
@@ -177,7 +177,7 @@ function initGame2() {
 // Jeu 3
 
 function game3(gameArea) {
-  // clean();
+  clean();
 
   document.body.style.background = "#333";
   const title = document.querySelector("h1");
@@ -233,4 +233,4 @@ function game4(gameAreaA) {
   clean();
 }
 
-game3(gameArea);
+game1(gameArea);

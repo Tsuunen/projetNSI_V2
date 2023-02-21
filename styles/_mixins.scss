@@ -4,3 +4,25 @@
   left: $x;
   transform: translate(-$x, -$y);
 }
+
+@mixin btn() {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  background: $cPrin;
+  color: $white;
+  border-radius: 9999px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+
+  &:hover {
+    background: $cAcc;
+  }
+}
+
+@mixin active() {
+  &.active {
+    display: block;
+  }
+}

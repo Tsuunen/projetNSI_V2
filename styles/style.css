@@ -9,6 +9,7 @@ body {
   background: #F1F1F1;
   font-family: "Nunito Sans", sans-serif;
   height: 100vh;
+  overflow: hidden;
 }
 
 .center {
@@ -129,48 +130,117 @@ nav h1::selection {
 
 .game3 .torch {
   position: absolute;
-  width: 200px;
-  height: 200px;
+  width: 180px;
+  height: 180px;
+  top: 40%;
+  left: 50%;
   border-radius: 9999px;
-  background: #F1F1F1;
+  background: #ff6;
   transform: translate(-50%, -50%);
   z-index: 5;
   display: none;
-  top: 8px;
-  left: 45.7%;
+  box-shadow: 0 0 30px 20px #ff6;
 }
 .game3 .torch-icon {
   position: absolute;
-  height: 50px;
-  width: 30px;
-  top: 8px;
-  left: 45.7%;
-  z-index: 15;
+  top: 30%;
+  left: 50%;
+  transform: translate(-50%, -30%);
+  background: #F1F1F1;
+  border: none;
+  outline: none;
+  font-size: 20px;
+  padding: 5px 12px;
+  border-radius: 10px;
+  cursor: pointer;
 }
-.game3 button {
+.game3 .torch-icon:hover {
+  background: #DDD;
+}
+.game3 .finishBtn {
   font-size: 16px;
   background: none;
   border: none;
   outline: none;
-  color: #333;
+  color: #000;
   position: absolute;
   z-index: 7;
   border-radius: 9999px;
   padding: 3px 8px;
-  bottom: 23%;
-  right: 36%;
 }
-.game3 button::after {
+.game3 .finishBtn::after {
   content: "";
   display: block;
   width: 0%;
   margin: 0 auto;
   height: 2px;
-  background: #333;
+  background: #000;
   transition: all 0.2s ease-in-out;
 }
-.game3 button:hover::after {
+.game3 .finishBtn:hover::after {
   width: 100%;
+}
+.game3 .finishBtn::selection {
+  background: none;
+}
+
+.game4 {
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+}
+.game4 .words-container {
+  text-align: center;
+  margin: 0 auto;
+  display: none;
+}
+.game4 .words-container.active {
+  display: block;
+}
+.game4 #word {
+  font-size: 40px;
+}
+.game4 .consigne {
+  text-align: center;
+  margin-top: 15px;
+}
+.game4 input {
+  margin-right: 10px;
+  font-size: 30px;
+  text-align: center;
+  margin: 25px auto;
+  margin-bottom: 25px;
+  display: none;
+}
+.game4 input.active {
+  display: block;
+}
+.game4 ol {
+  position: absolute;
+  margin: 5px 40px;
+}
+.game4 ol li {
+  font-size: 20px;
+}
+.game4 .start-btn {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  background: #2541BE;
+  color: #F1F1F1;
+  border-radius: 9999px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  margin: 25px auto;
+  display: none;
+}
+.game4 .start-btn:hover {
+  background: #16266D;
+}
+.game4 .start-btn.active {
+  display: block;
 }
 
 /*# sourceMappingURL=style.css.map */

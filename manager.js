@@ -200,7 +200,7 @@ function game3(gameArea) {
   btn.classList.add("finishBtn");
 
   container.appendChild(torch);
-  containergg.appendChild(torchIcon);
+  container.appendChild(torchIcon);
   container.appendChild(btn);
 
   gameArea.appendChild(container);
@@ -237,6 +237,8 @@ function game3(gameArea) {
 
 async function game4(gameArea) {
   // clean();
+
+  document.body.style.cursor = "default";
 
   const container = document.createElement("div");
   container.id = "container";
@@ -279,8 +281,7 @@ async function game4(gameArea) {
   let timer;
   let isPlaying = false;
 
-  await getRandomWords(20);
-  console.log(randomWords);
+  initGame4();
 
   startBtn.addEventListener("click", () => {
     startBtn.classList.toggle("active");
@@ -295,6 +296,7 @@ async function game4(gameArea) {
 
   document.addEventListener("keyup", e => {
     const word = document.querySelector("#word");
+    console.log("isPlaying : ", isPlaying);
     if (isPlaying) {
       if (e.key == 'Enter') {
         currentWord++;
@@ -305,22 +307,52 @@ async function game4(gameArea) {
           }
           else {
             createListItem(liste, "red");
+            afficheTexte("Vous avez fait une erreur. La partie est invalidée.<br> Le jeu redémarre...", wordsContainer);
+            setTimeout(function () {
+              score = 0;
+              isPlaying = false;
+              initGame4();
+            }, 4000);
+            return 0;
           }
           if (currentWord < randomWords.length) {
-            afficheTexte(randomWords[currentWord], wordsContainer)
+            afficheTexte(randomWords[currentWord], wordsContainer);
           }
           else {
             timer = new Date().getTime() - timeStart;
             console.log(timer);
             let finalScore = getScore(timer, score);
-            afficheTexte(`Votre score est ${finalScore}`, wordsContainer);
+            console.log("final score : ", finalScore);
+            afficheTexte(`Votre score est de ${finalScore} mot(s) par minute`, wordsContainer);
             isPlaying = false;
             }
           input.value = "";
         }           
         }
       }
+  })
+}
+
+function initGame4() {
+  const startBtn = document.querySelector(".start-btn");
+  const input = document.querySelector("input");
+  const wordsContainer = document.querySelector(".words-container");
+  const listeItems = document.querySelectorAll("li");
+  const mot = document.querySelector("#word");
+  currentWord = 0;
+
+  startBtn.classList.add("active");
+  input.classList.remove("active");
+  wordsContainer.classList.remove("active");
+
+  input.value = "";
+  mot.innerHTML = "";
+
+  listeItems.forEach(item => {
+    item.remove();
   });
+
+  getRandomWords(5);
 }
 
 function afficheTexte(text) {
@@ -349,7 +381,9 @@ function createListItem(liste, color) {
 }
 
 function getScore(time, score) {
-  if (time != 0 && score == randomWords.length) {
+  if (time != 0) {
+    console.log('score : ', score);
+    console.log("time : ", time);
     return Math.round(score / ((time * 0.001) / 60)); // * (score / randomWords.lenght);
   }
   return 0;

@@ -1,3 +1,5 @@
+import Game4 from "./games/game4.js";
+
 const gameArea = document.querySelector("#game");
 let randomWords = [];
 let currentWord = 0;
@@ -73,7 +75,7 @@ function game2(gameArea) {
   const container = document.createElement("div");
   container.id = "container";
   container.classList.add("game2");
-  
+
   const consigne = document.createElement("p");
   consigne.innerHTML = "Cliquez sur le bouton 'commencer' et testez votre rapidité !";
 
@@ -105,7 +107,7 @@ function game2(gameArea) {
   let timerTop;
   let timeoutHandle;
   let resetTimeoutHandle = null;
-  
+
   btnStart.addEventListener("click", () => {
     latence = 1000 + Math.random() * 2000;
     colorArea.classList.add("red");
@@ -113,13 +115,13 @@ function game2(gameArea) {
     btnStop.classList.toggle("active");
     timeStart = timerTop = new Date().getTime();
 
-    timeoutHandle = window.setTimeout( function() {
+    timeoutHandle = window.setTimeout(function () {
       colorArea.classList.remove("red");
       colorArea.classList.add("green");
       btnStop.innerHTML = "Cliquez !!!";
       timerTop = new Date().getTime();
 
-      resetTimeoutHandle = window.setTimeout(function() {
+      resetTimeoutHandle = window.setTimeout(function () {
         initGame2();
       }, 1500);
     }, latence);
@@ -129,13 +131,13 @@ function game2(gameArea) {
     window.clearTimeout(timeoutHandle);
     if (resetTimeoutHandle !== null) {
       window.clearTimeout(resetTimeoutHandle);
-    } 
+    }
 
     let timer = new Date().getTime();
 
     if (timer - timeStart < latence) {
       perdu(timer - timeStart, "TRICHEUR !!!");
-    } 
+    }
     else {
       let perf = timer - timerTop;
 
@@ -206,7 +208,7 @@ function game3(gameArea) {
   gameArea.appendChild(container);
 
   let torchEnable = false;
-  
+
   btn.style.left = `${Math.random() * (screen.width - 100)}px`;
   btn.style.top = `${70 + Math.random() * (screen.height - 190)}px`;
 
@@ -228,165 +230,13 @@ function game3(gameArea) {
   btn.addEventListener("click", () => {
     if (torchEnable) {
       document.body.style.background = "#F1F1F1";
-      game4(gameArea);
+      // game4(gameArea);
     }
   });
 }
 
 // Jeu 4
 
-async function game4(gameArea) {
-  // clean();
+let game4 = new Game4(gameArea);
 
-  document.body.style.cursor = "default";
-
-  const container = document.createElement("div");
-  container.id = "container";
-  container.classList.add("game4");
-
-  const wordsContainer = document.createElement("div");
-  wordsContainer.classList.add("words-container");
-
-  const motASaisir = document.createElement("p");
-  motASaisir.id = "word";
-  motASaisir.innerHTML = "";
-
-  const input = document.createElement("input");
-  input.type = "text";
-
-  const consigne = document.createElement("p");
-  consigne.classList.add("consigne");
-  consigne.innerHTML = "Tapez les mots qui apparaissent à l'écran le plus rapidement possible, appuyez sur 'Enter' pour valider et passer au mot suivant.";
-
-  const liste = document.createElement("ol");
-
-  const startBtn = document.createElement("button");
-  startBtn.type = "button";
-  startBtn.classList.add("start-btn");
-  startBtn.classList.add("active")
-  startBtn.innerHTML = "Commencer";
-
-  wordsContainer.appendChild(motASaisir);
-
-  container.appendChild(consigne);
-  container.appendChild(wordsContainer);
-  container.appendChild(input);
-  container.appendChild(startBtn);
-  container.appendChild(liste);
-
-  gameArea.appendChild(container);
-
-  let score = 0;
-  let timeStart;
-  let timer;
-  let isPlaying = false;
-
-  initGame4();
-
-  startBtn.addEventListener("click", () => {
-    startBtn.classList.toggle("active");
-    input.classList.toggle("active");
-    wordsContainer.classList.toggle("active");
-    isPlaying = true;
-    input.focus();
-
-    afficheTexte(randomWords[currentWord]);
-    timeStart = new Date().getTime();
-  });
-
-  document.addEventListener("keyup", e => {
-    const word = document.querySelector("#word");
-    console.log("isPlaying : ", isPlaying);
-    if (isPlaying) {
-      if (e.key == 'Enter') {
-        currentWord++;
-        if (currentWord <= randomWords.length) {
-          if (input.value == word.textContent) {
-            score++;
-            createListItem(liste, "green");
-          }
-          else {
-            createListItem(liste, "red");
-            afficheTexte("Vous avez fait une erreur. La partie est invalidée.<br> Le jeu redémarre...", wordsContainer);
-            setTimeout(function () {
-              score = 0;
-              isPlaying = false;
-              initGame4();
-            }, 4000);
-            return 0;
-          }
-          if (currentWord < randomWords.length) {
-            afficheTexte(randomWords[currentWord], wordsContainer);
-          }
-          else {
-            timer = new Date().getTime() - timeStart;
-            console.log(timer);
-            let finalScore = getScore(timer, score);
-            console.log("final score : ", finalScore);
-            afficheTexte(`Votre score est de ${finalScore} mot(s) par minute`, wordsContainer);
-            isPlaying = false;
-            }
-          input.value = "";
-        }           
-        }
-      }
-  })
-}
-
-function initGame4() {
-  const startBtn = document.querySelector(".start-btn");
-  const input = document.querySelector("input");
-  const wordsContainer = document.querySelector(".words-container");
-  const listeItems = document.querySelectorAll("li");
-  const mot = document.querySelector("#word");
-  currentWord = 0;
-
-  startBtn.classList.add("active");
-  input.classList.remove("active");
-  wordsContainer.classList.remove("active");
-
-  input.value = "";
-  mot.innerHTML = "";
-
-  listeItems.forEach(item => {
-    item.remove();
-  });
-
-  getRandomWords(5);
-}
-
-function afficheTexte(text) {
-  const mot = document.querySelector("#word");
-  if (mot != null) {
-    mot.innerHTML = text;
-  }
-}
-
-async function getRandomWords(numWords) {
-  try {
-    const response = await fetch(`https://random-word-api.herokuapp.com/word?number=${numWords}`);
-    const data = await response.json();
-    randomWords = data; // Affecte le tableau de mots retourné à la variable globale
-  } catch (error) {
-    console.log(error);
-  }
-}
-
-function createListItem(liste, color) {
-  const listItem = document.createElement("li");
-  listItem.innerHTML = randomWords[currentWord - 1];
-  listItem.style.color = color;
-
-  liste.appendChild(listItem);
-}
-
-function getScore(time, score) {
-  if (time != 0) {
-    console.log('score : ', score);
-    console.log("time : ", time);
-    return Math.round(score / ((time * 0.001) / 60)); // * (score / randomWords.lenght);
-  }
-  return 0;
-}
-
-game4(gameArea);
+game4.main();

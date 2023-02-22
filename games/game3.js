@@ -5,10 +5,12 @@ export default class Game3 {
   btn;
   torchEnable;
   area;
+  next;
 
   constructor(gameArea) {
     this.area = gameArea;
     this.torchEnable = false;
+    this.next = document.querySelector(".suivant");
 
     this.container = document.createElement("div");
     this.container.classList.add("game3");
@@ -32,6 +34,7 @@ export default class Game3 {
   }
 
   display() {
+    this.next.classList.remove("active");
     document.body.style.background = "#000";
     this.area.appendChild(this.container);
   }
@@ -40,15 +43,21 @@ export default class Game3 {
     this.container.remove();
   }
 
-  main() {
+  start() {
+    this.torch.style.display = "none";
+    document.body.style.cursor = "default";
+    this.btn.style.cursor = "default";
+    this.torchIcon.style.display = "block";
+
     this.btn.style.left = `${Math.random() * (screen.width - 100)}px`;
     this.btn.style.top = `${70 + Math.random() * (screen.height - 190)}px`;
-  
+
+  }
+
+  main() {
     document.addEventListener("mousemove", e => {
-      if (this.torchEnable) {
-        this.torch.style.left = `${e.x}px`;
-        this.torch.style.top = `${e.y}px`;
-      }
+      this.torch.style.left = `${e.x}px`;
+      this.torch.style.top = `${e.y}px`;
     });
   
     this.torchIcon.addEventListener("click", () => {
@@ -61,9 +70,8 @@ export default class Game3 {
   
     this.btn.addEventListener("click", () => {
       if (this.torchEnable) {
-        document.body.style.background = "#F1F1F1";
-        document.body.style.cursor = "default";
-        this.hide();
+        this.next.classList.add("active");
+        this.start();
       }
     });
   }

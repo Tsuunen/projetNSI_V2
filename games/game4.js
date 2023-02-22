@@ -13,12 +13,12 @@ export default class Game4 {
     currentWord;
     randomWords;
     area;
-    finishBtn;
+    Btn;
+    next;
   
     constructor(gameArea) {
       this.area = gameArea;
-
-      document.body.style.cursor = "default";
+      this.next = document.querySelector(".suivant");
   
       this.container = document.createElement("div");
       this.container.id = "container";
@@ -46,19 +46,12 @@ export default class Game4 {
       this.startBtn.classList.add("active")
       this.startBtn.innerHTML = "Commencer";
 
-      this.finishBtn = document.createElement("button");
-      this.finishBtn.type = "button";
-      this.finishBtn = document.createElement("button");
-      this.finishBtn.classList.add("start-btn");
-      this.finishBtn.innerHTML = "Continuer";
-  
       this.wordsContainer.appendChild(this.motASaisir);
   
       this.container.appendChild(this.consigne);
       this.container.appendChild(this.wordsContainer);
       this.container.appendChild(this.input);
       this.container.appendChild(this.startBtn);
-      this.container.appendChild(this.finishBtn);
       this.container.appendChild(this.liste);
 
       this.start(this);
@@ -66,6 +59,9 @@ export default class Game4 {
     }
 
     display() {
+      this.next.classList.remove("active");
+      document.body.style.cursor = "default";
+      document.body.style.background = "#F1F1F1";
       this.area.appendChild(this.container);
     }  
 
@@ -81,7 +77,6 @@ export default class Game4 {
       parent.startBtn.classList.add("active");
       parent.input.classList.remove("active");
       parent.wordsContainer.classList.remove("active");      
-      parent.finishBtn.classList.remove("active");
       parent.motASaisir.innerHTML = "";
   
       let listeItems = document.querySelectorAll("li");
@@ -121,11 +116,6 @@ export default class Game4 {
       return 0;
     }
 
-    finish() {
-      this.input.classList.remove("active");
-      this.finishBtn.classList.add("active");
-    }
-  
     async main() {
       this.startBtn.addEventListener("click", () => {
         this.startBtn.classList.toggle("active");
@@ -135,10 +125,6 @@ export default class Game4 {
         this.isPlaying = true;
         this.afficheTexte(this.randomWords[this.currentWord]);
         this.timeStart = new Date().getTime();
-
-        this.finishBtn.addEventListener("click", () => {
-          this.hide();
-        });
       });
   
       document.addEventListener("keyup", e => {
@@ -164,7 +150,8 @@ export default class Game4 {
                 let finalScore = this.getScore(this.timer, this.score);
                 this.afficheTexte(`Votre score est de ${finalScore} mot(s) par minute`, this.wordsContainer);
                 this.isPlaying = false;
-                this.finish();
+                this.next.classList.add("active");
+                this.start(this);
               }
               this.input.value = "";
             }

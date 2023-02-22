@@ -8,9 +8,11 @@ export default class Game1 {
 	check2;
 	check2Label;
   area;
+  next;
 
 	constructor(gameArea) {
     this.area = gameArea;
+    this.next = document.querySelector(".suivant");
 
     this.container = document.createElement("div");
     this.container.classList.add("center");
@@ -75,7 +77,7 @@ export default class Game1 {
         this.check2Container.style.display = "block";
       }
       else if (this.check1.checked && this.check2.checked) {
-        this.hide();
+        this.next.click();
       }
     });
   }

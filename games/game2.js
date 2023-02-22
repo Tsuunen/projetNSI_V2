@@ -10,8 +10,12 @@ export default class Game2 {
   timeoutHandle;
   resetTimeoutHandle;
   area;
+  next;
+  perf;
 
   constructor(gameArea) {
+    this.next = document.querySelector(".suivant");
+
     this.area = gameArea;
     this.container = document.createElement("div");
     this.container.id = "container";
@@ -24,8 +28,8 @@ export default class Game2 {
     this.colorArea.classList.add("color-area");
   
     this.btnStart = document.createElement("button");
-    this.btnStart.type = "button";
     this.btnStart.classList.add("active");
+    this.btnStart.type = "button";
     this.btnStart.id = "btnStart";
     this.btnStart.innerHTML = "Commencer";
   
@@ -33,16 +37,23 @@ export default class Game2 {
     this.btnStop.type = "button";
     this.btnStop.id = "btnStop";
     this.btnStop.innerHTML = "Attendez ...";
+
+    this.perf = document.createElement("p");
+    this.perf.classList.add("perf");
+    this.perf.innerHTML = " ";
   
     this.container.appendChild(this.consigne);
     this.container.appendChild(this.colorArea);
     this.container.appendChild(this.btnStart);
     this.container.appendChild(this.btnStop);
+    this.container.appendChild(this.perf);
 
     this.start(this);
   }
 
   display() {
+    document.body.style.cursor = "default";
+    document.body.style.background = "#F1F1F1";
     this.area.appendChild(this.container);
   }
 
@@ -72,8 +83,8 @@ export default class Game2 {
   }
   
   affichePerf(timeDiff) {
-    this.btnStop.innerHTML = `${timeDiff}ms`;
-    setTimeout(this.hide, 1500);
+    this.perf.innerHTML = `${timeDiff}ms`;
+    this.next.classList.add("active");
   }
 
   timerTimeout(game) {
@@ -115,6 +126,7 @@ export default class Game2 {
         }
         else {
           this.affichePerf(perf);
+          this.start(this);
         }
       }
     });

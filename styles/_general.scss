@@ -319,3 +319,48 @@ nav {
     align-items: center;
   }
 }
+
+// Game 6
+
+.game6 {
+  .row {
+    width: 100vw;
+    height: calc(80vh / 4);
+    // height: fit-content;
+    display: flex;
+    // background: #000;
+    // margin-block: 10px;
+    justify-content: space-between;
+    align-items: center;
+    padding: 2%;
+  }
+  .col {
+    border: 1px solid $cPrin;
+    background: #DDD;
+    border-radius: 9999px;
+    width: 11vh;
+    height: 11vh;
+    transition: all 0.1s;
+
+    &.light {
+      background: $cPrin;
+      box-shadow: 0 0 10px 7px $cPrin;
+    }
+
+    &:active {
+      transform: scale(0.9);
+    }
+  }
+
+  button {
+    @include btn();
+    @include center($y: 97%);
+  } 
+
+  p {
+    @include center($x: 97%, $y: 3%);
+    z-index: 999;
+    color: $white;
+    font-size: 25px;
+  }
+}

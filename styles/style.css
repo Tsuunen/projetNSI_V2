@@ -312,4 +312,55 @@ nav h1::selection {
   align-items: center;
 }
 
+.game6 .row {
+  width: 100vw;
+  height: 20vh;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 2%;
+}
+.game6 .col {
+  border: 1px solid #2541BE;
+  background: #DDD;
+  border-radius: 9999px;
+  width: 11vh;
+  height: 11vh;
+  transition: all 0.1s;
+}
+.game6 .col.light {
+  background: #2541BE;
+  box-shadow: 0 0 10px 7px #2541BE;
+}
+.game6 .col:active {
+  transform: scale(0.9);
+}
+.game6 button {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  background: #2541BE;
+  color: #F1F1F1;
+  border-radius: 9999px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  position: absolute;
+  top: 97%;
+  left: 50%;
+  transform: translate(-50%, -97%);
+}
+.game6 button:hover {
+  background: #16266D;
+}
+.game6 p {
+  position: absolute;
+  top: 3%;
+  left: 97%;
+  transform: translate(-97%, -3%);
+  z-index: 999;
+  color: #F1F1F1;
+  font-size: 25px;
+}
+
 /*# sourceMappingURL=style.css.map */

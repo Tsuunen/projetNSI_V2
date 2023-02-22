@@ -3,6 +3,7 @@ import Game2 from "./games/game2.js";
 import Game3 from "./games/game3.js";
 import Game4 from "./games/game4.js";
 import Game5 from "./games/game5.js";
+import Game6 from "./games/game6.js";
 
 const gameArea = document.querySelector("#game");
 const prev = document.querySelectorAll(".navMenu")[0];
@@ -13,6 +14,7 @@ let game2 = new Game2(gameArea);
 let game3 = new Game3(gameArea);
 let game4 = new Game4(gameArea);
 let game5 = new Game5(gameArea);
+let game6 = new Game6(gameArea);
 
 let level = 1;
 
@@ -43,7 +45,12 @@ function menu(level) {
       game5.display();
       game5.main();
       break
-  
+    case 6:
+      clean()
+      game6.display();
+      game6.main();
+      break
+      
     default:
       break;
   }
@@ -55,9 +62,10 @@ function clean() {
   game3.hide();
   game4.hide();
   game5.hide();
+  game6.hide();
 }
 
 suiv.addEventListener("click", () => menu(++level));
 prev.addEventListener("click", () => menu(--level));
 
-menu(1);
+menu(6);

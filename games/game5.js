@@ -11,10 +11,12 @@ export default class Game5 {
   div1;
   div2;
   perf;
+  next;
 
   constructor(gameArea) {
     this.area = gameArea;
     this.motEnCours = [];
+    this.next = document.querySelector(".suivant");
 
     this.container = document.createElement("div");
     this.container.classList.add("container");
@@ -54,6 +56,7 @@ export default class Game5 {
   }
 
   display() {
+    this.next.style.display = "none";
     this.area.appendChild(this.container);
   }
 
@@ -106,6 +109,7 @@ export default class Game5 {
       if (letterCount == this.slicedWord.length) {
         this.perf.innerHTML = `Vous avez gagné en ${this.score} coups <br> Votre score est ${Math.round(this.slicedWord.length / this.score * 100)}`;
         console.log(`gagné en ${this.score} coups`);
+        this.next.style.display = "block";
       }
     });
 

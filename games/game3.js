@@ -31,6 +31,8 @@ export default class Game3 {
     this.container.appendChild(this.torch);
     this.container.appendChild(this.torchIcon);
     this.container.appendChild(this.btn);
+
+    this.start();
   }
 
   display() {

@@ -285,3 +285,37 @@ nav {
     @include active;
   }
 }
+
+// Game 5
+
+.game5 {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 85vh;
+
+  p {
+    margin-top: -25px;
+    font-size: 40px;
+    text-transform: uppercase;
+    letter-spacing: 7px;
+  }
+
+  h4 {
+    text-align: center;
+    font-size: 2em;
+  }
+
+  button {
+    @include btn();
+  }
+
+  .div1 {
+    display: flex;
+    flex-direction: column;
+    justify-items: space-between;
+    align-items: center;
+  }
+}

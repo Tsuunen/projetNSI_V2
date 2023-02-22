@@ -273,4 +273,43 @@ nav h1::selection {
   display: block;
 }
 
+.game5 {
+  margin-top: 10px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: space-between;
+  height: 85vh;
+}
+.game5 p {
+  margin-top: -25px;
+  font-size: 40px;
+  text-transform: uppercase;
+  letter-spacing: 7px;
+}
+.game5 h4 {
+  text-align: center;
+  font-size: 2em;
+}
+.game5 button {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  background: #2541BE;
+  color: #F1F1F1;
+  border-radius: 9999px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+.game5 button:hover {
+  background: #16266D;
+}
+.game5 .div1 {
+  display: flex;
+  flex-direction: column;
+  justify-items: space-between;
+  align-items: center;
+}
+
 /*# sourceMappingURL=style.css.map */

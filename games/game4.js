@@ -76,8 +76,8 @@ export default class Game4 {
       parent.isPlaying = false;
       parent.startBtn.classList.add("active");
       parent.input.classList.remove("active");
-      parent.wordsContainer.classList.remove("active");      
-      parent.motASaisir.innerHTML = "";
+      // parent.wordsContainer.classList.remove("active");      
+      // parent.motASaisir.innerHTML = "";
   
       let listeItems = document.querySelectorAll("li");
       listeItems.forEach(item => {
@@ -93,7 +93,7 @@ export default class Game4 {
     async getRandomWords(numWords) {
       // this.randomWords = ["misanthropes","antinodes","submit","repertoire","excreter","shorthand","beknot","hyperinflation","feastful","asparagus","gleeked","apostrophise","classons","keglings","schmeared","victorias","illuminates","untrussing","confirmable","questionnaire"];
       try {
-        const response = await fetch(`https://random-word-api.herokuapp.com/word?number=${numWords}`);
+        const response = await fetch(`https://random-word-api.herokuapp.com/word?lang=en&number=${numWords}`);
         const data = await response.json();
         this.randomWords = data; // Affecte le tableau de mots retourné à la variable globale
       } catch (error) {
@@ -120,7 +120,7 @@ export default class Game4 {
       this.startBtn.addEventListener("click", () => {
         this.startBtn.classList.toggle("active");
         this.input.classList.toggle("active");
-        this.wordsContainer.classList.toggle("active");
+        this.wordsContainer.classList.add("active");
         this.input.focus();
         this.isPlaying = true;
         this.afficheTexte(this.randomWords[this.currentWord]);

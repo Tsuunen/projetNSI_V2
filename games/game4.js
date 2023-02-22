@@ -10,11 +10,14 @@ export default class Game4 {
     consigne;
     liste;
     startBtn;
-    idWord;
     currentWord;
     randomWords;
+    area;
+    finishBtn;
   
-      constructor(gameArea) {
+    constructor(gameArea) {
+      this.area = gameArea;
+
       document.body.style.cursor = "default";
   
       this.container = document.createElement("div");
@@ -42,6 +45,12 @@ export default class Game4 {
       this.startBtn.classList.add("start-btn");
       this.startBtn.classList.add("active")
       this.startBtn.innerHTML = "Commencer";
+
+      this.finishBtn = document.createElement("button");
+      this.finishBtn.type = "button";
+      this.finishBtn = document.createElement("button");
+      this.finishBtn.classList.add("start-btn");
+      this.finishBtn.innerHTML = "Continuer";
   
       this.wordsContainer.appendChild(this.motASaisir);
   
@@ -49,35 +58,45 @@ export default class Game4 {
       this.container.appendChild(this.wordsContainer);
       this.container.appendChild(this.input);
       this.container.appendChild(this.startBtn);
+      this.container.appendChild(this.finishBtn);
       this.container.appendChild(this.liste);
-  
-      gameArea.appendChild(this.container);
-  
-      this.idWord = document.querySelector("#word");
-      this.start();
+
+      console.log("motASaisir : ", this.motASaisir);
+      this.start(this);
   
     }
+
+    display() {
+      this.area.appendChild(this.container);
+    }  
+
+    hide() {
+      this.container.remove();
+    }
   
-  
-    async start() {
-      this.currentWord = 0;
-      this.score = 0;
-      this.input.value = "";
-      this.idWord.innerHTML = "";
-      this.isPlaying = false;
-      this.startBtn.classList.add("active");
-      this.input.classList.remove("active");
-      this.wordsContainer.classList.remove("active");
+    async start(parent) {
+      console.log("Parent, ", parent);
+      console.log("motASaisir, ", parent.motASaisir);
+      parent.currentWord = 0;
+      parent.score = 0;
+      parent.input.value = "";
+      parent.isPlaying = false;
+      parent.startBtn.classList.add("active");
+      parent.input.classList.remove("active");
+      parent.wordsContainer.classList.remove("active");      
+      parent.finishBtn.classList.remove("active");
+      parent.motASaisir.innerHTML = "";
   
       let listeItems = document.querySelectorAll("li");
       listeItems.forEach(item => {
         item.remove();
       });
-      await this.getRandomWords(5);
+      await parent.getRandomWords(5);
     }
     afficheTexte(text) {
-      if (this.idWord != null) {
-        this.idWord.innerHTML = text;
+      console.log("motASaisir, ", this.motASaisir);
+      if (this.motASaisir != null) {
+        this.motASaisir.innerHTML = text;
       }
     }
     async getRandomWords(numWords) {
@@ -107,6 +126,12 @@ export default class Game4 {
       }
       return 0;
     }
+
+    finish() {
+      console.log("finish");
+      this.input.classList.remove("active");
+      this.finishBtn.classList.add("active");
+    }
   
     async main() {
       this.startBtn.addEventListener("click", () => {
@@ -118,6 +143,10 @@ export default class Game4 {
         console.log(this.currentWord);
         this.afficheTexte(this.randomWords[this.currentWord]);
         this.timeStart = new Date().getTime();
+
+        this.finishBtn.addEventListener("click", () => {
+          this.hide();
+        });
       });
   
       document.addEventListener("keyup", e => {
@@ -126,16 +155,14 @@ export default class Game4 {
           if (e.key == 'Enter') {
             this.currentWord++;
             if (this.currentWord <= this.randomWords.length) {
-              if (this.input.value == this.idWord.textContent) {
+              if (this.input.value == this.motASaisir.textContent) {
                 this.score++;
                 this.createListItem(this.liste, "green");
               }
               else {
                 this.createListItem(this.liste, "red");
                 this.afficheTexte("Vous avez fait une erreur. La partie est invalidée.<br> Le jeu redémarre...", this.wordsContainer);
-                setTimeout(function () {
-                  game4.start();
-                }, 4000);
+                setTimeout(this.start, 4000, this);
                 return 0;
               }
               if (this.currentWord < this.randomWords.length) {
@@ -148,6 +175,7 @@ export default class Game4 {
                 console.log("final score : ", finalScore);
                 this.afficheTexte(`Votre score est de ${finalScore} mot(s) par minute`, this.wordsContainer);
                 this.isPlaying = false;
+                this.finish();
               }
               this.input.value = "";
             }

@@ -61,7 +61,6 @@ export default class Game4 {
       this.container.appendChild(this.finishBtn);
       this.container.appendChild(this.liste);
 
-      console.log("motASaisir : ", this.motASaisir);
       this.start(this);
   
     }
@@ -75,8 +74,6 @@ export default class Game4 {
     }
   
     async start(parent) {
-      console.log("Parent, ", parent);
-      console.log("motASaisir, ", parent.motASaisir);
       parent.currentWord = 0;
       parent.score = 0;
       parent.input.value = "";
@@ -94,7 +91,6 @@ export default class Game4 {
       await parent.getRandomWords(5);
     }
     afficheTexte(text) {
-      console.log("motASaisir, ", this.motASaisir);
       if (this.motASaisir != null) {
         this.motASaisir.innerHTML = text;
       }
@@ -120,15 +116,12 @@ export default class Game4 {
   
     getScore(time, score) {
       if (time != 0) {
-        console.log('score : ', score);
-        console.log("time : ", time);
         return Math.round(score / ((time * 0.001) / 60)); // * (score / randomWords.lenght);
       }
       return 0;
     }
 
     finish() {
-      console.log("finish");
       this.input.classList.remove("active");
       this.finishBtn.classList.add("active");
     }
@@ -140,7 +133,6 @@ export default class Game4 {
         this.wordsContainer.classList.toggle("active");
         this.input.focus();
         this.isPlaying = true;
-        console.log(this.currentWord);
         this.afficheTexte(this.randomWords[this.currentWord]);
         this.timeStart = new Date().getTime();
 
@@ -150,7 +142,6 @@ export default class Game4 {
       });
   
       document.addEventListener("keyup", e => {
-        console.log("isPlaying : ", this.isPlaying);
         if (this.isPlaying) {
           if (e.key == 'Enter') {
             this.currentWord++;
@@ -170,9 +161,7 @@ export default class Game4 {
               }
               else {
                 this.timer = new Date().getTime() - this.timeStart;
-                console.log(this.timer);
                 let finalScore = this.getScore(this.timer, this.score);
-                console.log("final score : ", finalScore);
                 this.afficheTexte(`Votre score est de ${finalScore} mot(s) par minute`, this.wordsContainer);
                 this.isPlaying = false;
                 this.finish();

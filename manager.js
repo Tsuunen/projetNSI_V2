@@ -10,7 +10,3 @@ let game2 = new Game2(gameArea);
 let game3 = new Game3(gameArea);
 let game4 = new Game4(gameArea);
 
-game3.display();
-game3.main();
-
-

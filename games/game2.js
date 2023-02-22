@@ -39,8 +39,6 @@ export default class Game2 {
     this.container.appendChild(this.btnStart);
     this.container.appendChild(this.btnStop);
 
-    console.log("Parent : ", this);
-
     this.start(this);
   }
 
@@ -53,7 +51,6 @@ export default class Game2 {
   }
 
   start(parent) {
-    console.log("Parent : ", parent);
     parent.colorArea.classList.remove("red");
     parent.colorArea.classList.remove("green");
   
@@ -71,12 +68,10 @@ export default class Game2 {
   }
 
   setTimeoutManual(func, tps, parent) {
-    console.log("setTimeoutManual", parent);
     window.setTimeout(func, tps, parent);
   }
   
   affichePerf(timeDiff) {
-    console.log("gagné", timeDiff);
     this.btnStop.innerHTML = `${timeDiff}ms`;
     setTimeout(this.hide, 1500);
   }

@@ -312,9 +312,15 @@ nav h1::selection {
   align-items: center;
 }
 
+.game6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+}
 .game6 .row {
   width: 100vw;
-  height: 20vh;
+  height: 18.75vh;
   display: flex;
   justify-content: space-between;
   align-items: center;
@@ -324,8 +330,8 @@ nav h1::selection {
   border: 1px solid #2541BE;
   background: #DDD;
   border-radius: 9999px;
-  width: 11vh;
-  height: 11vh;
+  width: 10vh;
+  height: 10vh;
   transition: all 0.1s;
 }
 .game6 .col.light {
@@ -334,6 +340,12 @@ nav h1::selection {
 }
 .game6 .col:active {
   transform: scale(0.9);
+}
+.game6 .rowBlock {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
 }
 .game6 button {
   padding: 10px 20px;
@@ -345,22 +357,28 @@ nav h1::selection {
   font-size: 20px;
   cursor: pointer;
   transition: all 0.2s;
-  position: absolute;
-  top: 97%;
-  left: 50%;
-  transform: translate(-50%, -97%);
 }
 .game6 button:hover {
   background: #16266D;
 }
 .game6 p {
-  position: absolute;
-  top: 3%;
-  left: 97%;
-  transform: translate(-97%, -3%);
-  z-index: 999;
-  color: #F1F1F1;
+  color: black;
   font-size: 25px;
+  padding-right: 60px;
+}
+.game6 h4 {
+  font-size: 22px;
+  padding-left: 20px;
+}
+.game6 h3 {
+  text-align: center;
+  margin-top: 5px;
+}
+.game6 footer {
+  width: calc(50% + 75px);
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 20px;
 }
 
 /*# sourceMappingURL=style.css.map */

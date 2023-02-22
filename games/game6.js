@@ -9,9 +9,11 @@ export default class Game6 {
   startBtn;
   next;
   timer;
+  div;
   reboursInterval;
   isPlaying;
   xMouse;
+  footer;
   yMouse;
   currentId;
   nbRow;
@@ -26,6 +28,9 @@ export default class Game6 {
     this.container.id = "container";
     this.container.classList.add("game6");
 
+    this.consigne = document.createElement("h3");
+    this.consigne.innerHTML = "Testez votre rapidité en éteignant le plus de lumière dans le temps imparti";
+
     this.startBtn = document.createElement("button");
     this.startBtn.innerHTML = "Commencer";
 
@@ -33,20 +38,30 @@ export default class Game6 {
 
     this.scoreDisplay = document.createElement("h4");
 
+    this.div = document.createElement("div");
+    this.div.classList.add("rowBlock");
+
+    this.footer = document.createElement("footer");
+
     this.nbRow = 4;
-    this.nbCol = 4;
+    this.nbCol = 7;
+
+    this.container.appendChild(this.consigne);
 
     for (let r = 0; r < this.nbRow; r++) {
       let divRow = this.createDiv("row");
       for (let c = 0; c < this.nbCol; c++) {
         divRow.appendChild(this.createDiv("col", `${r*this.nbCol + c}`));
       }
-      this.container.appendChild(divRow);
+      this.div.appendChild(divRow);
     }
 
-    this.container.appendChild(this.compteur);
-    this.container.appendChild(this.startBtn);
-    this.container.appendChild(this.scoreDisplay);
+    this.footer.appendChild(this.scoreDisplay);
+    this.footer.appendChild(this.compteur);
+    this.footer.appendChild(this.startBtn);
+
+    this.container.appendChild(this.div);
+    this.container.appendChild(this.footer);
 
     this.start();
   }
@@ -84,15 +99,17 @@ export default class Game6 {
   }
 
   compteARebourd(parent) {
+    parent.compteur.innerHTML = parent.timer;
     if (parent.timer > 0) {
       parent.timer--;
     }
     else {
       parent.isPlaying = false;
       document.getElementById(parent.currentId).classList.remove("light");
+      parent.startBtn.style.display = "block";
+      parent.compteur.style.display = "none";
       clearInterval(parent.reboursInterval);
     }
-    parent.compteur.innerHTML = parent.timer;
   }
 
   afficheScore(score) {
@@ -101,6 +118,9 @@ export default class Game6 {
 
   main() {
     this.startBtn.addEventListener("click", () => {
+      this.start();
+      this.startBtn.style.display = "none";
+      this.compteur.style.display = "block";
       this.reboursInterval = setInterval(this.compteARebourd, 1000, this);
       console.log(this.reboursInterval);
       this.changeCurrentLighted();

@@ -323,9 +323,14 @@ nav {
 // Game 6
 
 .game6 {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  height: 90vh;
+
   .row {
     width: 100vw;
-    height: calc(80vh / 4);
+    height: calc(75vh / 4);
     // height: fit-content;
     display: flex;
     // background: #000;
@@ -338,8 +343,8 @@ nav {
     border: 1px solid $cPrin;
     background: #DDD;
     border-radius: 9999px;
-    width: 11vh;
-    height: 11vh;
+    width: 10vh;
+    height: 10vh;
     transition: all 0.1s;
 
     &.light {
@@ -352,15 +357,41 @@ nav {
     }
   }
 
+  .rowBlock {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+
   button {
     @include btn();
-    @include center($y: 97%);
+    // @include center($y: 97%);
   } 
 
   p {
-    @include center($x: 97%, $y: 3%);
-    z-index: 999;
-    color: $white;
+    // @include center($x: 97%, $y: 3%);
+    color: black;
     font-size: 25px;
+    padding-right: 60px;
+  }
+
+  h4 {
+    // @include center($x: 1%, $y: 98%);
+    font-size: 22px;
+    padding-left: 20px;
+  }
+
+  h3 {
+    text-align: center;
+    // margin-bottom: -15px;
+    margin-top: 5px;
+  }
+
+  footer {
+    width: calc(50% + 75px);
+    display: flex;
+    justify-content: space-between;
+    margin-bottom: 20px;
   }
 }

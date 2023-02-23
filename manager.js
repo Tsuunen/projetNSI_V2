@@ -68,4 +68,4 @@ function clean() {
 suiv.addEventListener("click", () => menu(++level));
 prev.addEventListener("click", () => menu(--level));
 
-menu(6);
+menu(1);

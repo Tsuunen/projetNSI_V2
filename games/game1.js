@@ -20,12 +20,12 @@ export default class Game1 {
     this.container.id = "container";
 
     this.container = document.createElement("div");
-    this.container.classList.add("center");
     this.container.classList.add("game1");
     this.container.id = "container";
 
     this.playButton = document.createElement("div");
     this.playButton.classList.add("play-button");
+    this.playButton.innerHTML = "PLAY";
 
     this.check1Container = document.createElement("div");
     this.check1Container.classList.add("checkbox");
@@ -33,10 +33,11 @@ export default class Game1 {
     this.check1 = document.createElement("input");
     this.check1.type = "checkbox";
     this.check1.id = "check1";
+    this.check1.classList.add("tgl-flip");
 
     this.check1Label = document.createElement("label");
     this.check1Label.setAttribute("for", "check1");
-    this.check1Label.textContent = "Veuillez cocher la case avant de commencer";
+    this.check1Label.textContent = "Êtes-vous sûr de vouloir jouer ?";
 
     this.check2Container = document.createElement("div");
     this.check2Container.classList.add("checkbox");
@@ -44,10 +45,11 @@ export default class Game1 {
     this.check2 = document.createElement("input");
     this.check2.type = "checkbox";
     this.check2.id = "check2";
+    this.check2.classList.add("tgl-flip");
 
     this.check2Label = document.createElement("label");
     this.check2Label.setAttribute("for", "check2");
-    this.check2Label.textContent = "Veuillez cocher toutes les cases !";
+    this.check2Label.textContent = "Absolument sûr ?";
 
     this.check1Container.appendChild(this.check1);
     this.check1Container.appendChild(this.check1Label);

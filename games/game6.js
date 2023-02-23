@@ -86,6 +86,7 @@ export default class Game6 {
   }
 
   display() {
+    this.next.classList.remove("active");
     this.area.appendChild(this.container);
   }
 
@@ -108,6 +109,7 @@ export default class Game6 {
       document.getElementById(parent.currentId).classList.remove("light");
       parent.startBtn.style.display = "block";
       parent.compteur.style.display = "none";
+      parent.next.classList.add("active");
       clearInterval(parent.reboursInterval);
     }
   }

@@ -28,7 +28,7 @@ export default class Game6 {
     this.container.id = "container";
     this.container.classList.add("game6");
 
-    this.consigne = document.createElement("h3");
+    this.consigne = document.createElement("h2");
     this.consigne.innerHTML = "Testez votre rapidité en éteignant le plus de lumières dans le temps imparti";
 
     this.startBtn = document.createElement("button");
@@ -88,7 +88,6 @@ export default class Game6 {
   }
 
   display() {
-    // this.next.classList.remove("active");
     this.next.style.display = "none";
     this.area.appendChild(this.container);
   }
@@ -124,8 +123,8 @@ export default class Game6 {
   main() {
     this.startBtn.addEventListener("click", () => {
       this.start();
-      this.startBtn.style.display = "none";
       this.compteur.style.display = "block";
+      this.startBtn.style.display = "none";
       this.reboursInterval = setInterval(this.compteARebourd, 1000, this);
       console.log(this.reboursInterval);
       this.changeCurrentLighted();
@@ -133,7 +132,6 @@ export default class Game6 {
     });
 
     document.addEventListener("mousemove", e => {
-      // e = e || window.event;
       this.x = e.clientX;
       this.y = e.clientY;
     });

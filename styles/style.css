@@ -420,9 +420,10 @@ nav h1::selection {
   font-size: 22px;
   padding-left: 20px;
 }
-.game6 h3 {
+.game6 h2 {
   text-align: center;
   margin-top: 5px;
+  font-size: 20px;
 }
 .game6 footer {
   width: calc(50% + 75px);

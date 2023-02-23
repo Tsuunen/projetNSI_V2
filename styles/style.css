@@ -439,7 +439,7 @@ nav h1::selection {
   transform: translate(-50%, -50%);
   text-align: center;
 }
-.score button {
+.score .recommencer {
   padding: 10px 20px;
   border: none;
   outline: none;
@@ -451,13 +451,53 @@ nav h1::selection {
   transition: all 0.2s;
   margin: 20px;
 }
-.score button:hover {
+.score .recommencer:hover {
   background: #16266D;
 }
 .score span {
   color: #2541BE;
   text-decoration: underline;
   cursor: pointer;
+}
+
+.modal-window {
+  display: none;
+  position: absolute;
+  background: rgba(0, 0, 0, 0.5);
+  height: 100%;
+  width: 100%;
+}
+.modal-window .message-box {
+  background: #F1F1F1;
+  box-shadow: 10px 0 10px 10px #000;
+  font-size: 30px;
+  width: 400px;
+  border-radius: 15px;
+  position: absolute;
+  top: 35%;
+  left: 50%;
+  transform: translate(-50%, -35%);
+  text-align: center;
+  padding: 30px;
+}
+.modal-window .message-box .content {
+  margin-bottom: 15px;
+}
+.modal-window .message-box .exit-btn {
+  padding: 10px 20px;
+  border: none;
+  outline: none;
+  background: #2541BE;
+  color: #F1F1F1;
+  border-radius: 9999px;
+  font-size: 20px;
+  cursor: pointer;
+  transition: all 0.2s;
+  font-size: 18px;
+  margin: 10px auto;
+}
+.modal-window .message-box .exit-btn:hover {
+  background: #16266D;
 }
 
 /*# sourceMappingURL=style.css.map */

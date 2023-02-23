@@ -424,18 +424,15 @@ nav {
 
   button {
     @include btn();
-    // @include center($y: 97%);
   } 
 
   p {
-    // @include center($x: 97%, $y: 3%);
     color: black;
     font-size: 25px;
     padding-right: 60px;
   }
 
   h4 {
-    // @include center($x: 1%, $y: 98%);
     font-size: 22px;
     padding-left: 20px;
   }
@@ -460,7 +457,7 @@ nav {
   @include center();
   text-align: center;
 
-  button {
+  .recommencer {
     @include btn();
     margin: 20px;
   }
@@ -469,5 +466,35 @@ nav {
     color: $cPrin;
     text-decoration: underline;
     cursor: pointer;
+  }
+}
+
+.modal-window {
+  display: none;
+  position: absolute;
+  background: rgba($color: #000, $alpha: 0.5);
+  // opacity: 0.5;
+  height: 100%;
+  width: 100%;
+
+  .message-box {
+    background: $white;
+    box-shadow: 10px 0 10px 10px #000;
+    font-size: 30px;
+    width: 400px;
+    border-radius: 15px;
+    @include center($y: 35%);
+    text-align: center;
+    padding: 30px;
+
+    .content {
+      margin-bottom: 15px;
+    }
+
+    .exit-btn {
+      @include btn();
+      font-size: 18px;
+      margin: 10px auto;
+    }
   }
 }

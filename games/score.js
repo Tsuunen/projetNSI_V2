@@ -3,7 +3,11 @@ export default class Score {
   message;
   restartBtn;
   area;
+  modalWindow;
+  messageBox;
+  messageBoxContent;
   ici;
+  exitBtn;
   next;
 
   constructor(gameArea) {
@@ -21,8 +25,26 @@ export default class Score {
 
     this.restartBtn = document.createElement("button");
     this.restartBtn.innerHTML = "Recommencer";
+    this.restartBtn.classList.add("recommencer");
+
+    this.modalWindow = document.createElement("div");
+    this.modalWindow.classList.add("modal-window");
+
+    this.messageBox = document.createElement("div");
+    this.messageBox.classList.add("message-box");
+
+    this.messageBoxContent = document.createElement("p");
+    this.messageBoxContent.classList.add("content");
+    this.messageBoxContent.innerHTML = "C'est une blague ?!<br>Si il y a un bug, c'est un code : <a href='https://www.urbandictionary.com/define.php?term=pebkac' target='_blank'>PEBCAK</a>";
+
+    this.exitBtn = document.createElement("button");
+    this.exitBtn.innerHTML = "Ok j'ai compris";
+    this.exitBtn.classList.add("exit-btn");
 
     this.message.appendChild(this.ici);
+    this.messageBox.appendChild(this.messageBoxContent);
+    this.messageBox.appendChild(this.exitBtn);
+    this.modalWindow.appendChild(this.messageBox);
 
     this.container.appendChild(this.message);
     this.container.appendChild(this.restartBtn);
@@ -31,10 +53,17 @@ export default class Score {
   display() {
     this.next.style.display = "none";
     this.area.appendChild(this.container);
+    this.area.appendChild(this.modalWindow);
   }
 
   main() {
     this.restartBtn.addEventListener("click", () => location.reload());
-    this.ici.addEventListener("click", () => window.alert("Et non, c'était une blague. En cas de bug cela doit venir de chez vous !"));
+    this.ici.addEventListener("click", () => {
+      console.log('test');
+      this.modalWindow.style.display = "block";
+    });
+    this.exitBtn.addEventListener("click", () => {
+      this.modalWindow.style.display = "none";
+    })
   }
 }

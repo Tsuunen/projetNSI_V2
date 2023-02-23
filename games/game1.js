@@ -8,6 +8,7 @@ export default class Game1 {
 	check2;
 	check2Label;
   area;
+  consigne;
   next;
 
 	constructor(gameArea) {
@@ -25,7 +26,7 @@ export default class Game1 {
 
     this.playButton = document.createElement("div");
     this.playButton.classList.add("play-button");
-    this.playButton.innerHTML = "PLAY";
+    this.playButton.innerHTML = "LET'S PLAY";
 
     this.check1Container = document.createElement("div");
     this.check1Container.classList.add("checkbox");
@@ -51,6 +52,9 @@ export default class Game1 {
     this.check2Label.setAttribute("for", "check2");
     this.check2Label.textContent = "Absolument sûr ?";
 
+    this.consigne = document.createElement("h3");
+    this.consigne.innerHTML = "Recliquez sur le bouton après avoir validé vos choix"
+
     this.check1Container.appendChild(this.check1);
     this.check1Container.appendChild(this.check1Label);
 
@@ -64,6 +68,7 @@ export default class Game1 {
 
   display() {
     this.area.appendChild(this.container);
+    this.area.appendChild(this.consigne);
   }
 
   hide() {
@@ -74,6 +79,7 @@ export default class Game1 {
     this.playButton.addEventListener("click", () => {
       if (!this.check1.checked) {
         this.check1Container.style.display = "block";
+        this.consigne.classList.add("active");
       }
       else if (!this.check2.checked && this.check1.checked) {
         this.check2Container.style.display = "block";

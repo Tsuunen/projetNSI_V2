@@ -49,7 +49,6 @@ export default class Game5 {
       this.motEnCours.push("_");
     });
     this.afficheMot(this.motEnCours.join(''));
-    console.log(this.slicedWord);
 
     this.score = 0;
     this.perf.innerHTML = "";
@@ -71,7 +70,6 @@ export default class Game5 {
   actualiseReponse(letter) {
     for (let i = 0; i < this.slicedWord.length; i++) {
       if (this.slicedWord[i] == letter) {
-        console.log(i, letter);
         this.motEnCours[i] = letter;
       }      
     }
@@ -101,7 +99,6 @@ export default class Game5 {
   main() {
     document.addEventListener("keyup", e => {
       let index = this.actualiseReponse(e.key);
-      console.log(e.key);
       this.afficheMot(this.motEnCours.join(''));
       this.score++;
       

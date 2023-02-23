@@ -61,38 +61,15 @@ nav {
   }
 }
 
-// Indice
+// Game 1
 
-.hint {
-  position: absolute;
-  bottom: 30px;
-  right: 30px;
-
-  button {
-    position: absolute;
-    padding: 5px 15px;
-    background: $cPrin;
-    outline: none;
-    border: none;
-    font-size: 18px;
-    color: $white;
-    border-radius: 9999px;
-    cursor: pointer;
-    transition: all 0.2s;
-
-    &:hover {
-      background: $cAcc;
-    }
-
-    &.active {
-      width: 300px;
-      height: auto;
-      border-radius: 20px;
-    }
+#game {
+  h3 {
+    @include center($y: 90%);
+    display: none;
+    @include active();
   }
 }
-
-// Game 1
 
 .game1 {
   @include center();
@@ -103,10 +80,10 @@ nav {
   align-items: center;
 
   .play-button {
-    height: 250px;
+    // height: 250px;
     perspective-origin: 50% 50%;
     transform-style: preserve-3d;
-    width: 300px;
+    // width: 300px;
     position: relative;
     border-radius: 10px;
     background: $cPrin;
@@ -117,14 +94,19 @@ nav {
 
     color: $white;
     text-align: center;
-    line-height: 250px;
-    font-size: 100px;
+    // line-height: 125px;
+    padding: 30px;
+    font-size: 90px;
     font-weight: bold;
     letter-spacing: 8px;
 
     &:hover {
       top: 8px;
       box-shadow: 0 12px $cAcc;
+    }
+
+    &::selection {
+      background: none;
     }
 
     &:active {
@@ -191,61 +173,6 @@ nav {
     }
   }
 
-  // .tgl-flip {
-  //   + .tgl-btn {
-  //     padding: 2px;
-  //     transition: all .2s ease;
-  //     font-family: sans-serif;
-  //     perspective: 100px;
-  //     &:after,
-  //     &:before {
-  //       display: inline-block;
-  //       transition: all .4s ease;
-  //       width: 100%;
-  //       text-align: center;
-  //       position: absolute;
-  //       line-height: 2em;
-  //       font-weight: bold;
-  //       color: #fff;
-  //       position: absolute;
-  //       top: 0;
-  //       left: 0;
-  //       backface-visibility: hidden;
-  //       border-radius: 4px;
-  //     }
-      
-  //     &:after {
-  //       content: "Yeah!";
-  //       background: #02C66F;
-  //       transform: rotateY(-180deg);
-  //     }
-      
-  //     &:before {
-  //       background: #FF3A19;
-  //       content: "Nope";
-  //     }
-  
-  //     &:active:before {
-  //       transform: rotateY(-20deg);
-  //     }
-  //   }
-    
-  //   &:checked + .tgl-btn {
-  //     &:before {
-  //       transform: rotateY(180deg);
-  //     }
-      
-  //     &:after {
-  //       transform: rotateY(0);
-  //       left: 0;
-  //       background: #7FC6A6;
-  //     }
-      
-  //     &:active:after {
-  //       transform: rotateY(20deg);
-  //     }
-  //   }
-  // }
 }
 
 // Game 2
@@ -262,6 +189,7 @@ nav {
     width: 500px;
     height: 350px;
     background: #333;
+    border-radius: 15px;
 
     &.red {
       background: red;
@@ -523,5 +451,23 @@ nav {
     display: flex;
     justify-content: space-between;
     margin-bottom: 20px;
+  }
+}
+
+// Score
+
+.score {
+  @include center();
+  text-align: center;
+
+  button {
+    @include btn();
+    margin: 20px;
+  }
+
+  span {
+    color: $cPrin;
+    text-decoration: underline;
+    cursor: pointer;
   }
 }

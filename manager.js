@@ -71,4 +71,4 @@ function clean() {
 
 suiv.addEventListener("click", () => menu(++level));
 
-menu(1);
+menu(level);

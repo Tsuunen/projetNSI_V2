@@ -148,7 +148,7 @@ export default class Game4 {
               else {
                 this.timer = new Date().getTime() - this.timeStart;
                 let finalScore = this.getScore(this.timer, this.score);
-                this.afficheTexte(`Votre score est de ${finalScore} mot(s) par minute`, this.wordsContainer);
+                this.afficheTexte(`Votre score est de ${finalScore} mots par minute`, this.wordsContainer);
                 this.isPlaying = false;
                 this.next.classList.add("active");
                 this.start(this);

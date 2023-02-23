@@ -72,6 +72,7 @@ export default class Game1 {
   }
 
   hide() {
+    this.consigne.remove();
     this.container.remove();
   }
 

@@ -16,7 +16,7 @@ export default class Score {
     this.ici = document.createElement("span");
     this.ici.innerHTML = "ici";
     
-    this.message = document.createElement("h3");
+    this.message = document.createElement("h2");
     this.message.innerHTML = "Merci d'avoir joué ! Pour tout bug trouvé, veuillez me contacter : ";
 
     this.restartBtn = document.createElement("button");

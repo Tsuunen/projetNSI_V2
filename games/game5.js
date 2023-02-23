@@ -12,6 +12,7 @@ export default class Game5 {
   div2;
   perf;
   next;
+  isPlaying;
 
   constructor(gameArea) {
     this.area = gameArea;
@@ -22,7 +23,7 @@ export default class Game5 {
     this.container.classList.add("container");
     this.container.classList.add("game5");
 
-    this.consigne = document.createElement("h3");
+    this.consigne = document.createElement("h2");
     this.consigne.innerHTML = "Retrouvez le mot caché (en anglais) en tapant les lettres sur votre clavier";
 
     this.mot = document.createElement("p");
@@ -43,6 +44,7 @@ export default class Game5 {
 
   async start() {
     this.motEnCours = [];
+    this.isPlaying = true;
     await this.getRandomWords(1);
     this.slicedWord = this.randomWord[0].split('');
     this.slicedWord.forEach(letter => {
@@ -98,15 +100,18 @@ export default class Game5 {
 
   main() {
     document.addEventListener("keyup", e => {
-      let index = this.actualiseReponse(e.key);
-      this.afficheMot(this.motEnCours.join(''));
-      this.score++;
+      if (this.isPlaying) {
+        let index = this.actualiseReponse(e.key);
+        this.afficheMot(this.motEnCours.join(''));
+        this.score++;
       
-      let letterCount = this.getCorrectLetterCount();
-      if (letterCount == this.slicedWord.length) {
-        this.perf.innerHTML = `Vous avez gagné en ${this.score} coups <br> Votre score est ${Math.round(this.slicedWord.length / this.score * 100)}`;
-        console.log(`gagné en ${this.score} coups`);
-        this.next.style.display = "block";
+        let letterCount = this.getCorrectLetterCount();
+        if (letterCount == this.slicedWord.length) {
+          this.isPlaying = false;
+          this.perf.innerHTML = `Vous avez gagné en ${this.score} coups <br> Votre score est ${Math.round(this.slicedWord.length / this.score * 100)}`;
+          console.log(`gagné en ${this.score} coups`);
+          this.next.style.display = "block";
+        }
       }
     });
 
